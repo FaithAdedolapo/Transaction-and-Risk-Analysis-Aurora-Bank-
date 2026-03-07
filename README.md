@@ -21,6 +21,12 @@ This project analyzes customer financial health, transaction behavior, and portf
 
 The analysis provides strategic insights to improve underwriting decisions, enhance portfolio quality, and drive revenue growth through data-driven segmentation.
 
+<ul>
+  <li>Identified 20% high-risk customers using DTI & credit scoring</li>
+  <li>Analyzed 8+ Merchant Categories for revenue drivers</li>
+  <li>Delivered credit risk recommendations for portfolio improvement</li>
+</ul>
+
 ## Data Source
 
 The dataset consists of five relational tables:
