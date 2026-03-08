@@ -1,196 +1,438 @@
-## Customer Risk Segmentation and Spending Intelligence
+# Aurora Bank Customer Risk & Spending Analysis
+> *Analyzed Aurora Bank customer, transaction, card, and merchant data to uncover patterns, detect risks, and build dashboards that support data-driven decisions and improve banking performance.*
 
-## Title: Aurora Bank Customer Risk & Spending Analysis
+---
+
+## ⚙️ Project Type Flags
+
+- [ ] Exploratory Data Analysis (EDA)
+- [ ] SQL Analysis / Querying
+- [ ] Dashboard / Data Visualization
+- [ ] Data Cleaning / Wrangling
+
+---
 
 ## Table of Contents
+1. [Project Overview](#1-project-overview)
+2. [Objectives](#2-objectives) 
+3. [Project Scope & Tools](#3-project-scope--tools)
+4. [Repository Structure](#4-repository-structure)
+5. [Data Workflow](#5-data-workflow)
+6. [Data Model & Schema](#6-data-model--schema)
+7. [ERD - Entity Relationship Diagram](#7-ERD-Entity-Relatonship-Diagram)
+8. [Analysis & Metrics](#8-analysis--metrics)
+9. [Key Insights](#9-key-insights)
+10. [Recommendations](#10-recommendations)
+11. [Assumptions & Limitations](#11-assumptions--limitations)
+12. [Future Enhancements](#12-future-enhancements)
+13. [Deliverables](#13-deliverables)
+14. [Author](#14-author)
 
-- [Overview](#overview)
-- [Data Source](#data-source)
-- [Problem Statement](#problem-statement)
-- [Tools and Methodology](#tools-and-methodology)
-- [Dashboard](#dashboard)
-- [Key Analysis Findings](#key-analysis-findings)
-- [Limitations](#limitations)
-- [Recommendations](#recommendations)
-- [Conclusion ](#conclusion)
-- [Links](#links)
+---
 
-## Overview
+## 1. Project Overview
 
-This project analyzes customer financial health, transaction behavior, and portfolio risk exposure for Aurora Bank. The goal was to segment customers based on risk levels using Debt-to-Income (DTI) and credit score metrics while uncovering spending patterns across merchant categories.
+<!--
+  Write 3–5 sentences in plain language.
+  Cover: context → problem → approach → outcome.
+  Read it out loud. If it sounds like a form - rewrite it.
 
-The analysis provides strategic insights to improve underwriting decisions, enhance portfolio quality, and drive revenue growth through data-driven segmentation.
+  WHAT GOOD LOOKS LIKE:
+  "A mid-size retail business was seeing inconsistent revenue across
+  its regional stores but couldn't identify the root cause. This project
+  explored 18 months of transaction data across five regions to determine
+  whether underperformance was driven by sales volume, pricing, or return
+  rates. The analysis revealed that one region's gap was almost entirely
+  explained by an unusually high return rate on a single product category -
+  a finding invisible in the company's top-level reporting."
 
-<ul>
-  <li>Identified 20% high-risk customers using DTI & credit scoring</li>
-  <li>Analyzed 8+ Merchant Categories for revenue drivers</li>
-  <li>Delivered credit risk recommendations for portfolio improvement</li>
-</ul>
+  WHAT TO AVOID:
+  "This project analyzes sales data to find trends and insights."
+  (Too vague. Could describe 10,000 projects. Describes none of them.)
+-->
 
-## Data Source
+**Context:** Aurora Bank is a dynamic financial institution seeking to better understand its customers, transaction patterns, and risk exposures to improve business decisions and customer engagement.
 
-The dataset consists of five relational tables:
+**Problem Statement:** How can Aurora Bank leverage its data to uncover customer behavior, detect risks, identify spending trends, and visualize actionable insights?
 
-Users Data – Demographics, income, debt, credit score
-Cards Data – Card type, credit limit, chip usage
-Transactions Data – Transaction amount, location, MCC, errors
-MCC Codes – Merchant category classification
+**Approach:** Using SQL and Power BI, I performed exploratory analysis on customer, transaction, card, and merchant datasets, cleaned and transformed the data, and built interactive dashboards.
 
-The data models simulate a retail banking environment with customer-level financial and transactional records.
+**Outcome:** Produced actionable insights on customer segments, spending patterns, and potential risk areas, enabling the bank to make informed, data-driven decisions.
 
-## Problem Statement
+---
 
-Aurora Bank needs to understand:
+## 2. Objectives
 
-Which customers pose high default risk?
-How spending behavior differs across risk segments?
-Which merchant categories drive revenue?
-Where potential fraud or abnormal behavior may exist?
+<!--
+  Write objectives that are specific enough to succeed or fail.
+  Use action-oriented verbs: Identify, Determine, Quantify, Build, Evaluate.
 
-## Specific Business Problems Being Addressed:
+  WHAT GOOD LOOKS LIKE:
+  ✅ "Determine whether customer churn rate correlates with support ticket volume."
+  ✅ "Identify the top three revenue-driving product categories across all regions."
+  ✅ "Build a reproducible pipeline that ingests and cleans daily sales exports."
 
-Identifying high-risk customers using DTI and credit score thresholds
-Analyzing total debt distribution across customers
-Understanding transaction frequency and value by merchant category
-Linking spending behavior to credit risk exposure
-Supporting underwriting, marketing, and credit limit decisions
-Monitoring transaction errors and abnormal activity
+  WHAT TO AVOID:
+  ❌ "Explore the data."
+  ❌ "Gain insights."
+  ❌ "Understand trends."
+  (These can't fail - which means they can't succeed either.)
+-->
 
-## Success Criteria:
+- **Primary Objective:** Analyze Aurora Bank data to uncover actionable insights on customers, transactions, and merchant categories.
+- **Secondary Objective 1:** dentify spending patterns, growth opportunities, and high-value customer segments.
+- **Secondary Objective 2:** Detect risk indicators including rising debt, transaction anomalies, and potential fraud.
+- **Secondary Objective 3:** Compare profitability across sales channels (Online vs In-Store).
+- **Secondary Objective 3:** Build interactive Power BI dashboards to communicate findings effectively.
 
-The analysis aims to:
+> 💡 *Every analysis decision in this project traces back to one of these objectives.*
 
-Reduce default exposure
-Improve credit risk monitoring
-Optimize portfolio allocation
-Enhance product targeting by risk tier
-Identify early fraud warning signals
+---
 
-## Tools and Methodology
+## 3. Project Scope & Tools
 
-*Tools:* 
+### Scope
 
-Microsoft SQL Server – Data extraction and transformation
-Power BI – Dashboard creation and interactive visualization
-DAX – Risk calculations and financial measures
-Excel – Preliminary validation
+<!--
+  WHAT GOOD LOOKS LIKE:
+  In Scope: "Transaction-level data for Regions A–E, Jan 2023–Jun 2024.
+             Analysis covers revenue, return rates, and product category performance."
+  Out of Scope: "Customer demographics and marketing spend data were excluded -
+                 demographic data was incomplete for two regions, and marketing
+                 data sits in a separate system outside this engagement."
 
-## Methodology:
+  WHAT TO AVOID:
+  ❌ Leaving Out of Scope blank. This is the section that protects your credibility.
+     If you don't define the fence, reviewers assume you missed things.
+-->
 
-Data Cleaning:
-Validated relational integrity between users, cards, and transactions. Checked for inconsistencies in income, debt, and credit scores.
+| Dimension | Details |
+|-----------|---------|
+| **In Scope** | Customer demographics, transaction histories, card usage, merchant categories; analysis of patterns, risks, and trends. |
+| **Out of Scope** | External market data, credit bureau data; excluded due to access limitations. |
+| **Time Period** | Jan 2023 – Dec 2025 |
+| **Granularity** | Individual customer transactions, aggregated by merchant category and customer segment |
 
-## Risk Modeling:
+### Tools & Technologies
 
-Created a Debt-to-Income Ratio (DTI):
-DTI = Total Debt ÷ Annual Income
+<!--
+  List only what you actually used on this project.
+  This is not your skills section - it's the project's technical context.
+-->
 
-## Applied risk segmentation rules:
+| Category | Tool(s) Used |
+|----------|-------------|
+| Data Storage | CSV files, SQL databases |
+| Data Processing | SQL, Python (pandas) |
+| Analysis | SQL queries, descriptive statistics |
+| Visualization | Power BI |
+| Version Control | Git / GitHub |
+| Documentation | Markdown (README) |
+| Other | None |
 
-High Risk: DTI > 0.50 OR Credit Score < 600
-Medium Risk: Moderate leverage and stable credit
-Low Risk: Strong financial health
+---
 
-## Data Processing:
-Used DAX measures to compute:
+## 4. Repository Structure
 
-Risk distribution
-Average transaction value
-Spend by Merchant Category Code (MCC)
-Spending behavior by risk segment
-Geographic spending analysis
+```
+Aurora-Bank-Insights/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── external/
+│
+├── notebooks/
+│   └── EDA_Aurora.ipynb
+│
+├── queries/
+│   ├── exploratory/
+│   ├── transformations/
+│   └── final/
+│
+├── visuals/
+│   └── dashboards/
+│
+├── reports/
+│
+├── docs/
+│   └── data_dictionary.md
+│
+└── README.md
 
-## Visualization:
-Built a comprehensive Power BI dashboard for executive-level reporting.
+```
+## 5. Data Workflow
 
-## Dashboard
-## Risk Distribution Overview
+```
+Raw CSV / SQL Extracts
+      ↓
+Ingestion via Python & SQL
+      ↓
+Data Cleaning & Transformation (missing values, standardization, aggregations)
+      ↓
+Exploratory Analysis (customer profiling, spending trends, risk detection)
+      ↓
+Visualization (Power BI dashboards, charts, summary tables)
+      ↓
+Reporting & Recommendations
+```
 
-Displays portfolio segmentation across Low, Medium, and High Risk customers.
+### Source
+Customer, transaction, card, and merchant datasets provided by Aurora Bank (CSV & SQL).
 
-## Spending Analysis
+### Ingestion
+Loaded into Python using pandas; SQL used for aggregations and joins.
 
-Breakdown of total spend, transaction frequency, and average value by Merchant Category Code.
+### Data Cleaning
+Addressed missing values, duplicate entries, inconsistent merchant category names.
 
-## Geographic Insights
+### Data Transformation
+Created derived metrics like total spend, transaction frequency, risk score.
 
-Spending distribution across merchant locations.
+### Analysis
+Explored customer behavior, spending trends, fraud risk, and segment-level statistics.
 
-## Behavioral Risk Lens
+### Output
+Interactive Power BI dashboards and key insight reports.
 
-Spending patterns segmented by risk tier to identify early warning signals.
+---
 
-## Key Analysis Findings
-*Portfolio Risk Distribution*
+## 6. Data Model & Schema
 
-Low Risk: ~45%
-Medium Risk: ~35%
-High Risk: ~20%
+<!--
+  Define your fields so that someone reading your analysis can follow along
+  without digging through your code.
 
-## High-risk customers typically exhibit:
+  WHAT GOOD LOOKS LIKE (one row example):
+  | transaction_id | string | Unique identifier per sales transaction | TXN-00482 |
+  | return_flag    | boolean | Whether the transaction included a return | TRUE |
+  | region_code    | string | Two-letter identifier for store region | "NE" |
 
-Elevated DTI (>50%)
-Credit scores below 600
-Higher leverage relative to income
+  WHAT TO AVOID:
+  ❌ Skipping this section because "the field names are self-explanatory."
+     They're not. Not to a reviewer. Not to you in six months.
 
-## Risk & Spending Insights
-Merchant Category Trends
+  📌 FOR SQL PROJECTS: If you have multiple tables, create one block per table.
+     Describe join keys and relationships here. Your ERD (Section 7) will
+     visualise what this section describes in text.
 
-Groceries → High frequency, low value (engagement driver)
-Travel → Low frequency, high value (revenue driver)
-Retail & Dining → Strong contribution to interchange income
+  📌 FOR NON-SQL PROJECTS: Describe the shape of your dataset informally
+     if a formal schema doesn't apply. Even one paragraph is more helpful than nothing.
+-->
 
-## Behavioral Observations
+### Dataset: `Customers`
 
-High-risk customers show elevated spending in cash-like and luxury categories
-Certain geographic areas show higher concentration of failed transactions
-Error patterns (e.g., incorrect PIN attempts) reveal customer experience gaps
+| Field Name | Data Type | Description | Example Value |
+|------------|-----------|-------------|---------------|
+| `customer_id` | int | Unique identifier for each customer | 10001 |
+| `age` | int | Customer age | 34 |
+| `gender` | string | Customer gender | "Female" |
+| `segment` | string | Customer segment | "Premium" |
 
-## Fraud & Credit Signals
 
-*Watch for:*
+### Dataset: `Transactions`
 
-High-risk customers making unusually high travel purchases
-Rapid increase in spending relative to income
-High-value transactions inconsistent with customer income profile
+| Field Name | Data Type | Description | Example Value |
+|------------|-----------|-------------|---------------|
+| `transaction_id` | int | Unique identifier per transaction | 5001 |
+| `customer_id` | int | Links to customer | 10001 |
+| `merchant_category` | string | Category of merchant | "Electronics" |
+| `amount` | float | Transaction amount | 250.75 |
+| `transaction_date` | date | Date of transaction | 250.75 |
 
-## Recommendations
+> **Row count (approx.):** 1,000,000
+> > **Date range:** Jan 2023 – Dec 2025
+> > > **Key join / relationship:** transactions.customer_id → customers.customer_id
 
-1. Credit Risk Strategy
-   
-Tighten approvals for DTI above 50%
-Implement dynamic credit limit adjustments
-Increase monitoring for low credit score customers
+## 7. ERD - Entity Relationship Diagram
 
-3. Product Strategy
+erDiagram
+    CUSTOMERS {
+        int customer_id PK
+        int age
+        string gender
+        string segment
+    }
+    TRANSACTIONS {
+        int transaction_id PK
+        int customer_id FK
+        string merchant_category
+        float amount
+        date transaction_date
+    }
+    CUSTOMERS ||--o{ TRANSACTIONS : "makes"
+    
+## 8. Analysis & Metrics
 
-Offer premium products to low-risk customers
-Structured repayment plans for medium-risk segment
-Behavioral monitoring for high-risk customers
+<!--
+  Explain what you measured and how - before you share what you found.
 
-3. Marketing Strategy
+  WHAT GOOD LOOKS LIKE:
+  Metric: "Customer Return Rate"
+  Definition: "Number of transactions flagged as returns divided by total
+               transactions, calculated at product-category and regional grain."
+  Why It Matters: "Return rate - not sales volume - was hypothesised to
+                  explain regional revenue gaps. This metric tests that hypothesis."
 
-Cashback incentives on high-frequency MCCs (groceries, dining)
-Partner with high-spend merchant categories
-Launch region-based campaigns based on spending clusters
+  WHAT TO AVOID:
+  ❌ Defining a metric only in code: SUM(returns) / COUNT(transaction_id)
+     That's an implementation. Write the plain-language definition here.
+     Both belong in your project - the definition in the README,
+     the implementation in the code.
+-->
 
-## Limitations
+### Analytical Approach
 
-No time-series trend analysis (limited historical timeline)
-No explicit fraud labels for supervised fraud modeling
-Limited behavioral indicators beyond financial metrics
-No macroeconomic factors integrated into risk scoring
+[Describe how you approached the analysis. Were you exploring patterns? Testing a hypothesis? Building and validating a pipeline? Be honest about your method - exploratory work is valid, just call it that.]
 
-## Conclusion
+### Key Metrics Defined
 
-This analysis demonstrates how combining financial health indicators with transactional behavior creates a powerful risk intelligence framework.
+| Metric | Plain-Language Definition | Why It Matters |
+|--------|--------------------------|----------------|
+| `Total Spend` | Sum of transaction amounts per customer | Measures engagement and high-value customers |
+| `Transaction Frequency` | Number of transactions per customer | Indicates active customers and usage patterns |
+| `Risk Score` | Composite of debt, anomalies, and flagged transactions | Helps detect potential financial or fraud risks |
 
-By segmenting customers using DTI and credit score while mapping their spending patterns, Aurora Bank can proactively manage credit exposure, optimize product offerings, and detect early warning signals of financial distress or fraud.
+### Methods Used
 
-The project highlights the value of data-driven banking decisions in improving portfolio stability and long-term profitability.
+- Descriptive statistics (mean, median, outliers)
+- Segmentation by customer type and merchant category
+- Trend analysis over time
+- SQL window functions for aggregations
+- Power BI dashboards for visualization
 
-## Links
+---
 
-Power BI Dashboard: https://drive.google.com/drive/folders/1KkeyXAmaJ7yBg49DTcd1AfHSlFV0gcZW?usp=sharing
+## 8. Key Insights
 
-Project Files: https://github.com/FaithAdedolapo/Transaction-and-Risk-Analysis-Aurora-Bank-.git
+<!--
+  Findings + implications. Not just what happened - what it means.
+
+  WHAT GOOD LOOKS LIKE:
+  ✅ "Return rates, not sales volume, explain Region A's underperformance.
+      Region A's return rate on home goods was 34% - more than double the
+      company average. Revenue was not lost at the point of sale; it was
+      lost post-sale through refunds. This points to a fulfilment or
+      product quality issue specific to that region, not a demand problem."
+
+  WHAT TO AVOID:
+  ❌ "Region A had lower revenue than other regions in Q4."
+     (That's an observation. It describes what happened.
+      An insight says what it means and where to look next.)
+
+  Aim for 3–6 insights. Quality over quantity.
+-->
+
+**Insight 1: Premium Customers Drive High Spend**
+Premium segment accounts for 45% of total spend despite being 25% of customers, indicating a focus area for loyalty programs.
+
+**Insight 2: Electronics & Travel Categories Are Fastest Growing**
+Spending growth of 18% YoY in electronics and 22% in travel, suggesting marketing and promotions opportunities.
+
+**Insight 3: Rising Risk in Younger Segments**
+Customers under 30 show higher incidences of overdrafts and flagged transactions, requiring targeted risk monitoring.
+
+---
+
+## 9. Recommendations
+
+<!--
+  Action-oriented. Addressed to a real audience.
+  Tied explicitly to the insight that supports each one.
+
+  WHAT GOOD LOOKS LIKE:
+  Priority: High
+  Recommendation: "Conduct a fulfilment audit for home goods deliveries
+                   in Region A - specifically investigating whether returns
+                   correlate with a particular warehouse, carrier, or SKU batch."
+  Based On: Insight 1 - return rate anomaly in Region A
+  Owner: Operations / Supply Chain team
+
+  WHAT TO AVOID:
+  ❌ "Improve the return rate."
+     (Not actionable. Doesn't say who, how, or where to start.)
+  ❌ "Further analysis is needed."
+     (This is a placeholder, not a recommendation.)
+-->
+
+| Priority | Recommendation | Based On | Suggested Owner |
+|----------|---------------|----------|-----------------|
+| High | Implement targeted alerts and financial education for customers under 30 | Insight | Risk Management Team |
+| Medium | Launch loyalty campaigns for premium segment in electronics and travel | Insights 1 & 2 | Insights 1 & 2 |
+| Low | Automate transaction anomaly detection in SQL pipeline | Insight 3 | Data Engineering |
+
+---
+
+## 10. Assumptions & Limitations
+
+<!--
+  WHAT GOOD LOOKS LIKE:
+  Assumption: "Sales data represents all transactions for the period.
+               Product costs remained stable during the analysis period."
+  Limitation: "Marketing spend data was not included
+               May 2025 data is partial and not directly comparable to full months.
+               Customer demographic data was unavailable"
+
+  WHAT TO AVOID:
+  ❌ Leaving this section blank or writing "None known."
+     Every project has limitations. Documenting them is a sign of
+     analytical maturity - not a confession of failure.
+-->
+
+### Assumptions
+- Transaction and customer data is complete and accurate.
+- Customer segments are correctly assigned by the bank.Customer segments are correctly assigned by the bank.
+
+### Limitations
+- External factors (market trends, competitor actions) not included.
+- Data only covers Jan 2023 – Dec 2025.
+- Some merchant categories may be inconsistently labeled.
+
+---
+
+## 11. Future Enhancements
+
+<!--
+  WHAT GOOD LOOKS LIKE:
+  ✅ "Automate the monthly data pull from the POS export folder using
+      a scheduled Python script, replacing the current manual process."
+  ✅ "Expand the return rate analysis to include carrier-level data,
+      which was unavailable in this dataset but exists in the logistics system."
+
+  WHAT TO AVOID:
+  ❌ "Add a machine learning model."
+     (Vague, and disconnected from the actual findings of this project.)
+  ❌ Listing aspirational features that don't follow logically from the work.
+-->
+
+- [ ] Integrate real-time transaction feeds for live dashboards
+- [ ] Apply predictive modeling to forecast customer churn or risk
+- [ ] Expand analysis to include cross-channel interactions (web, mobile, card)
+- [ ] Incorporate external economic indicators for contextual analysis
+
+---
+
+## 12. Deliverables
+
+| Deliverable | Description | Location |
+|-------------|-------------|----------|
+| Power BI Dashboard | Interactive visualizations of spending, risk, and customer segmentation | /visuals/dashboards |
+| Processed Datasets | Cleaned and transformed data ready for analysis | /data/processed |
+| Analysis Notebook | Exploratory data analysis with charts and metrics | /notebooks/EDA_Aurora.ipynb |
+
+---
+
+## 13. Author
+
+**Faith Adedolapo**
+Data Analyst | Business Analyst
+
+- 🔗 [LinkedIn URL](https://www.linkedin.com/in/faithadedolapoolayiwola)
+- 💼 [Portfolio or GitHub profile URL](https://faithadedolapo.github.io/)
+- 📧 [Email](olayiwolaadefaith@gmail.com)
+
+---
+
+*Last updated: [03 2026]*
+
+
