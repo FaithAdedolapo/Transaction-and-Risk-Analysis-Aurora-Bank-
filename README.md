@@ -206,4 +206,5 @@ The project highlights the value of data-driven banking decisions in improving p
 ## Links
 
 Power BI Dashboard: https://drive.google.com/drive/folders/1KkeyXAmaJ7yBg49DTcd1AfHSlFV0gcZW?usp=sharing
+
 Project Files: https://github.com/FaithAdedolapo/Transaction-and-Risk-Analysis-Aurora-Bank-.git
