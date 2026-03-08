@@ -103,20 +103,6 @@ Geographic spending analysis
 ## Visualization:
 Built a comprehensive Power BI dashboard for executive-level reporting.
 
-## Project Files
-
-📊 **Power BI Dashboard**
-- [Download Power BI File](Aurora_Bank.pbix)
-
-📄 **Project Report**
-- [View PDF Report](Aurora_Bank.pdf)
-
-📑 **Presentation**
-- [View PowerPoint Presentation](Aurora_Bank_Presentation.pptx)
-
-📑 **Microsoft SQL**
-- [View Microsof SQL](Aurora_BanK.pptx)
-
 ## Dashboard
 ## Risk Distribution Overview
 
