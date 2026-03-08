@@ -14,12 +14,12 @@
 
 ## Table of Contents
 1. [Project Overview](#1-project-overview)
-2. [Objectives](#2-objectives) 
+2. [Objectives](#2-objectives)
 3. [Project Scope & Tools](#3-project-scope--tools)
 4. [Repository Structure](#4-repository-structure)
 5. [Data Workflow](#5-data-workflow)
 6. [Data Model & Schema](#6-data-model--schema)
-7. [ERD - Entity Relationship Diagram](#7-ERD-Entity-Relatonship-Diagram)
+7. [ERD - Entity Relationship Diagram](#7-erd---entity-relationship-diagram)
 8. [Analysis & Metrics](#8-analysis--metrics)
 9. [Key Insights](#9-key-insights)
 10. [Recommendations](#10-recommendations)
@@ -175,6 +175,7 @@ Exploratory Analysis (customer profiling, spending trends, risk detection)
 Visualization (Power BI dashboards, charts, summary tables)
       ↓
 Reporting & Recommendations
+
 ```
 
 ### Source
@@ -244,8 +245,10 @@ Interactive Power BI dashboards and key insight reports.
 > > **Date range:** Jan 2023 – Dec 2025
 > > > **Key join / relationship:** transactions.customer_id → customers.customer_id
 
-## 7. ERD - Entity Relationship Diagram
 
+## 7. ERD - Entity Relationship Diagram
+### Mermaid Diagram 
+```mermaid
 erDiagram
     CUSTOMERS {
         int customer_id PK
@@ -260,8 +263,19 @@ erDiagram
         float amount
         date transaction_date
     }
-    CUSTOMERS ||--o{ TRANSACTIONS : "makes"
-    
+    CUSTOMERS ||--o{ TRANSACTIONS : makes
+```
+
+---
+
+**Table Relationships Summary:**
+
+| Relationship | Join Key | Type |
+|-------------|----------|------|
+| `transactions` → `customers` | `customer_id` | Many-to-One |
+
+---
+
 ## 8. Analysis & Metrics
 
 <!--
@@ -283,7 +297,7 @@ erDiagram
 
 ### Analytical Approach
 
-[Describe how you approached the analysis. Were you exploring patterns? Testing a hypothesis? Building and validating a pipeline? Be honest about your method - exploratory work is valid, just call it that.]
+Exploratory analysis of spending patterns, customer demographics, and risk factors; segmented data by customer type and merchant category; identified anomalies and trends.
 
 ### Key Metrics Defined
 
@@ -303,7 +317,7 @@ erDiagram
 
 ---
 
-## 8. Key Insights
+## 9. Key Insights
 
 <!--
   Findings + implications. Not just what happened - what it means.
@@ -334,7 +348,7 @@ Customers under 30 show higher incidences of overdrafts and flagged transactions
 
 ---
 
-## 9. Recommendations
+## 10. Recommendations
 
 <!--
   Action-oriented. Addressed to a real audience.
@@ -363,7 +377,7 @@ Customers under 30 show higher incidences of overdrafts and flagged transactions
 
 ---
 
-## 10. Assumptions & Limitations
+## 11. Assumptions & Limitations
 
 <!--
   WHAT GOOD LOOKS LIKE:
@@ -390,7 +404,7 @@ Customers under 30 show higher incidences of overdrafts and flagged transactions
 
 ---
 
-## 11. Future Enhancements
+## 12. Future Enhancements
 
 <!--
   WHAT GOOD LOOKS LIKE:
@@ -412,7 +426,7 @@ Customers under 30 show higher incidences of overdrafts and flagged transactions
 
 ---
 
-## 12. Deliverables
+## 13. Deliverables
 
 | Deliverable | Description | Location |
 |-------------|-------------|----------|
@@ -422,9 +436,10 @@ Customers under 30 show higher incidences of overdrafts and flagged transactions
 
 ---
 
-## 13. Author
+## 14. Author
 
 **Faith Adedolapo**
+
 Data Analyst | Business Analyst
 
 - 🔗 [LinkedIn URL](https://www.linkedin.com/in/faithadedolapoolayiwola)
@@ -433,6 +448,6 @@ Data Analyst | Business Analyst
 
 ---
 
-*Last updated: [03 2026]*
+*Last updated: March 2026
 
 
